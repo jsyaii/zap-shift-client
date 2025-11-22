@@ -1,10 +1,11 @@
 import React from 'react';
 import { CiDeliveryTruck } from 'react-icons/ci';
+import { FaMotorcycle, FaRegCreditCard } from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router';
 
 const DashboardLayout = () => {
     return (
-        <div className="drawer lg:drawer-open max-w-7xl mx-auto">
+        <div className="drawer lg:drawer-open max-w-7xl mx-auto ">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
                 {/* Navbar */}
@@ -41,13 +42,25 @@ const DashboardLayout = () => {
                                 <span className="is-drawer-close:hidden">My Parcels</span>
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History" to="/dashboard/payment-history">
+                                <FaRegCreditCard />
+                                <span className="is-drawer-close:hidden">Payment History</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Riders" to="/dashboard/approve-riders">
+                                <FaMotorcycle />
+                                <span className="is-drawer-close:hidden">Approve Riders</span>
+                            </NavLink>
+                        </li>
 
                         {/* List item */}
                         <li>
                             <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
                                 {/* Settings icon */}
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
-                                <span className="is-drawer-close:hidden">Settings ok</span>
+                                <span className="is-drawer-close:hidden">Settings</span>
                             </button>
                         </li>
                     </ul>
