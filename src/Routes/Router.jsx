@@ -28,11 +28,12 @@ Component: HomeLayouts
 
         {
 
-path: "rider",
+path: "/rider",
 element: <PrivateRoute>
   <Rider></Rider>,
-</PrivateRoute>
-
+</PrivateRoute>,
+loader: () => fetch('/serviceCenters.json')
+ .then(res => res.json())
 
         },
         {

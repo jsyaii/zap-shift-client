@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogIn from '../SocialLogin/SocialLogin';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 
 
@@ -12,18 +13,20 @@ const Register = () => {
     const { registerUser, updateUserProfile } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
 
-    console.log('in register', location)
+    
 
 
     const handleRegistration = (data) => {
 
-        console.log('after register', data.photo[0]);
+        
         const profileImg = data.photo[0];
 
         registerUser(data.email, data.password)
-            .then(result => {
-                console.log(result.user);
+            .then(() => {
+
+               
 
                 // 1. store the image in form data
                 const formData = new FormData();
@@ -34,12 +37,29 @@ const Register = () => {
 
                 axios.post(image_API_URL, formData)
                     .then(res => {
-                        console.log('after image upload', res.data.data.url)
+                        const photoURL = res.data.data.url;
+
+
+// create user in the mongoDB
+
+  const userInfo = {
+                            email: data.email,
+                            displayName: data.name,
+                            photoURL: photoURL
+                        }
+                        axiosSecure.post('/users', userInfo)
+                        .then(res =>{
+                            if(res.data.insertedId){
+                                console.log('user created in the database');
+                            }
+                        })
+
+
 
                         // update user profile to firebase
                         const userProfile = {
                             displayName: data.name,
-                            photoURL: res.data.data.url
+                            photoURL: photoURL
                         }
 
                         updateUserProfile(userProfile)
