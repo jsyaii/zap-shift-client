@@ -51,7 +51,7 @@ const DashboardLayout = () => {
                         <li>
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Riders" to="/dashboard/approve-riders">
                                 <FaMotorcycle />
-                                <span className="is-drawer-close:hidden">Approve Riders</span>
+                                <span className="is-drawer-close:hidden">Approve Rider</span>
                             </NavLink>
                         </li>
 
