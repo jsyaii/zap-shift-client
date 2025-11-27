@@ -5,6 +5,57 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
+const AssignRiders = () => {
+    const [selectedParcel, setSelectedParcel] = useState(null);
+    const axiosSecure = useAxiosSecure();
+    const riderModalRef = useRef();
+
+    const { data: parcels = [], refetch: parcelsRefetch } = useQuery({
+        queryKey: ['parcels', 'pending-pickup'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/parcels?deliveryStatus=pending-pickup')
+            return res.data;
+        }
+    })
+
+    // todo: invalidate query after assigning a rider
+    const { data: riders = [] } = useQuery({
+        queryKey: ['riders', selectedParcel?.senderDistrict, 'available'],
+        enabled: !!selectedParcel,
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/riders?status=approved&district=${selectedParcel?.senderDistrict}&workStatus=available`);
+            return res.data;
+        }
+    })
+
+    const openAssignRiderModal = parcel => {
+        setSelectedParcel(parcel);
+
+        riderModalRef.current.showModal()
+    }
+
+    const handleAssignRider = rider => {
+        const riderAssignInfo = {
+            riderId: rider._id,
+            riderEmail: rider.email,
+            riderName: rider.name,
+            parcelId: selectedParcel._id
+        }
+        axiosSecure.patch(`/parcels/${selectedParcel._id}`, riderAssignInfo)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    riderModalRef.current.close();
+                    parcelsRefetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `Rider has been assigned.`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
 
     return (
         <div>
