@@ -14,6 +14,9 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentSuccess from "../pages/Dashboard/PaymentSuccess/PaymentSuccess";
 import PaymentCancelled from "../pages/Dashboard/PaymentCancelled/PaymentCancelled";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+
+import AdminRoute from "./AdminRoute";
+import UsersManagement from "../pages/Dashboard/UserManagement/UserManagement";
 import ApproveRiders from "../pages/Dashboard/ApproveRiders/ApproveRiders";
 
 export const router = createBrowserRouter([
@@ -104,14 +107,29 @@ Component: MyParcels,
         path: 'payment-cancelled', 
         Component: PaymentCancelled,
       },
-      {
+
+{
         path: 'payment-history', 
         Component: PaymentHistory
       },
+
+
+ {
+        path: 'approve-riders',
+        element: <AdminRoute><ApproveRiders></ApproveRiders></AdminRoute>
+      },
+      // {
+      //   path: 'assign-riders',
+      //   element: <AdminRoute><AssignRiders></AssignRiders></AdminRoute>
+      // },
       {
-        path: 'approve-riders', 
-        Component: ApproveRiders
-      }
+        path: 'users-management',
+        element: <AdminRoute><UsersManagement></UsersManagement></AdminRoute>
+      },
+
+
+
+      
 
     ]
 }
