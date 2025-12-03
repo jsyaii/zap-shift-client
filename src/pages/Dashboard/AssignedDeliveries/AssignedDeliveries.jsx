@@ -26,20 +26,20 @@ const AssignedDeliveries = () => {
 
         let message = `Parcel Status is updated with ${status.split('_').join(' ')}`
 
-    //     axiosSecure.patch(`/parcels/${parcel._id}/status`, statusInfo)
-    //         .then(res => {
-    //             if (res.data.modifiedCount) {
-    //                 refetch();
-    //                 Swal.fire({
-    //                     position: "top-end",
-    //                     icon: "success",
-    //                     title: message,
-    //                     showConfirmButton: false,
-    //                     timer: 1500
-    //                 });
-    //             }
-    //         })
-    // }
+        axiosSecure.patch(`/parcels/${parcel._id}/status`, statusInfo)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
 
     return (
         <div>
