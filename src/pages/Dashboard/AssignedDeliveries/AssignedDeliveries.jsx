@@ -73,14 +73,14 @@ const AssignedDeliveries = () => {
                                 }
 
                             </td>
-                            {/* <td>
+                            <td>
                                 <button
                                     onClick={() => handleDeliveryStatusUpdate(parcel, 'parcel_picked_up')}
                                     className='btn btn-primary text-black'>Mark as Picked Up</button>
                                 <button
                                     onClick={() => handleDeliveryStatusUpdate(parcel, 'parcel_delivered')}
                                     className='btn btn-primary text-black mx-2'>Mark as Delivered</button>
-                            </td> */}
+                            </td>
                         </tr>)}
 
 
