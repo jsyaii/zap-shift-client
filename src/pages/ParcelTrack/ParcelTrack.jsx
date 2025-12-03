@@ -1,11 +1,12 @@
 import { useParams } from "react-router";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+
 import { useQuery } from "@tanstack/react-query";
+import useAxios from "../../hooks/useAxios";
 
 
 const ParcelTrack = () => {
     const { trackingId } = useParams();
-    const axiosInstance = useAxiosSecure();
+    const axiosInstance = useAxios();
 
     const {data: trackings = []} = useQuery({
         queryKey: ['tracking', trackingId],
