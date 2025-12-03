@@ -40,9 +40,9 @@ const ParcelTrack = () => {
                             />
                         </svg>
                     </div>
-                    {/* <div className="timeline-end timeline-box">
+                    <div className="timeline-end timeline-box">
                         <span className='text-xl'>{log.details}</span>
-                    </div> */}
+                    </div>
                     <hr />
                 </li>)
                 }
