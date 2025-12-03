@@ -7,12 +7,12 @@ const ParcelTrack = () => {
     // const { trackingId } = useParams();
     // const axiosInstance = useAxiosSecure();
 
-    // const {data: trackings = []} = useQuery({
-    //     queryKey: ['tracking', trackingId],
-    //     queryFn: async () =>{
-    //         const res  = await axiosInstance.get(`/trackings/${trackingId}/logs`)
-    //         return res.data;
-    //     }
+    const {data: trackings = []} = useQuery({
+        queryKey: ['tracking', trackingId],
+        queryFn: async () =>{
+            const res  = await axiosInstance.get(`/trackings/${trackingId}/logs`)
+            return res.data;
+        }
     })
 
     return (
