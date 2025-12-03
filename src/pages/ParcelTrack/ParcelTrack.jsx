@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const ParcelTrack = () => {
-    // const { trackingId } = useParams();
-    // const axiosInstance = useAxiosSecure();
+    const { trackingId } = useParams();
+    const axiosInstance = useAxiosSecure();
 
     const {data: trackings = []} = useQuery({
         queryKey: ['tracking', trackingId],
